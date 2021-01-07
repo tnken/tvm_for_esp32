@@ -11,8 +11,23 @@ void app_main(void)
 {
     InputData data = read_data_from_usb_serial();
     ExecResult result = tarto_vm_run((char*) data.content);
-    if (result.type == SUCCESS) {
-        printf("return val: %d\n", result.return_value);
+
+    switch(result.type) {
+        case SUCCESS: {
+            if (result.return_value.type == VAL_NUMBER) {
+                printf("return val: %d\n", result.return_value.as.number);
+            }
+            break;
+        }
+        // TODO: エラー対応．ホスト側も合わせて要検討
+        case ERROR_DIVISION_BY_ZERO: {
+            printf("error\n");
+            break;
+        }
+        case ERROR_UNKNOWN_OPCODE: {
+            printf("error\n");
+            break;
+        }
     }
 
     // restart

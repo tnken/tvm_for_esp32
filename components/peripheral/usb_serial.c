@@ -91,8 +91,9 @@ static void uart_event_task(void *pvParameters)
     vTaskDelete(NULL);
 }
 
-InputData read_data_from_usb_serial() {
-  uart_config_t uart_config = {
+InputData read_data_from_usb_serial()
+{
+    uart_config_t uart_config = {
       .baud_rate = 115200,
       .data_bits = UART_DATA_8_BITS,
       .parity = UART_PARITY_DISABLE,
@@ -124,4 +125,9 @@ InputData read_data_from_usb_serial() {
             return (InputData) {len, data};
         }
     } while(1);
+}
+
+void write_data_to_usb_serial()
+{
+    // TODO: ホスト側のクライアントと同時に実装する
 }

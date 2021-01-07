@@ -71,7 +71,7 @@ ExecResult exec_interpret(uint8_t *bytecode)
         Value r = vm_pop();
         Value l = vm_pop();
         if (r.as.number == 0) {
-          return EXEC_RESULT(ERROR_DIVISION_BY_ZERO, 0);
+          return EXEC_RESULT(ERROR_DIVISION_BY_ZERO, NIL_VAL());
         }
         vm_push(NUMBER_VAL(l.as.number/r.as.number));
         break;
@@ -150,15 +150,12 @@ ExecResult exec_interpret(uint8_t *bytecode)
         break;
       }
       default:
-        return EXEC_RESULT(ERROR_UNKNOWN_OPCODE, 0);
+        return EXEC_RESULT(ERROR_UNKNOWN_OPCODE, NIL_VAL());
     }
   }
 
   Value val = vm_pop();
-  if (val.type == VAL_BOOL) {
-    return EXEC_RESULT(SUCCESS, val.as.boolean);
-  }
-  return EXEC_RESULT(SUCCESS, val.as.number);
+  return EXEC_RESULT(SUCCESS, val);
 }
 
 uint8_t* parse_bytecode(char* str)

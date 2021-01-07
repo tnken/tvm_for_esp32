@@ -9,6 +9,7 @@
 #define GLOBAL_MAX 256
 #define NUMBER_VAL(value) ((Value){ VAL_NUMBER, { .number = value } })
 #define BOOL_VAL(value) ((Value){ VAL_BOOL, { .boolean = value } })
+#define NIL_VAL() ((Value){.type = VAL_NIL})
 #define EXEC_RESULT(type, value) ((ExecResult){type, value})
 
 typedef enum {
@@ -41,7 +42,7 @@ typedef enum {
 
 typedef struct {
   resultType type;
-  uint16_t return_value;
+  Value return_value;
 } ExecResult;
 
 ExecResult tarto_vm_run();
