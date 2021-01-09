@@ -45,4 +45,4 @@ typedef struct {
   Value return_value;
 } ExecResult;
 
-ExecResult tarto_vm_run();
+ExecResult tarto_vm_run(char*);
