@@ -28,6 +28,12 @@ void app_main(void)
             printf("error\n");
             break;
         }
+        case ERROR_NO_METHOD: {
+            break;
+        }
+        case ERROR_OTHER: {
+            break;
+        }
     }
 
     // restart
